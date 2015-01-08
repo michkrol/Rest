@@ -24,8 +24,6 @@ public class PersonListAdapter extends BaseAdapter {
     List<Person> persons = new ArrayList<Person>();
 
     public PersonListAdapter() {
-        persons.add(new Person("Ala Guć", "Drutex"));
-        persons.add(new Person("Stefan But", "Uniwersytet Gdański"));
     }
 
     @Override
