@@ -7,6 +7,7 @@ import org.androidannotations.annotations.UiThread;
 import org.androidannotations.annotations.rest.RestService;
 
 import pl.edu.ug.aib.firstApp.data.FacebookPage;
+import pl.edu.ug.aib.firstApp.data.PhoneBook;
 
 @EBean
 public class RestBackgroundTask {
@@ -15,20 +16,22 @@ public class RestBackgroundTask {
     FirstActivity activity;
 
     @RestService
-    FacebookPageRestClient restClient;
+    PhoneBookRestClient restClient;
 
     @Background
-    void doInBackground(String pageName) {
+    void getPhoneBook() {
         try {
-            FacebookPage fbPage = restClient.getPage(pageName);
-            publishResult(fbPage);
+            restClient.setHeader("X-Dreamfactory-Application-Name", "phonebook");
+            PhoneBook phoneBook = restClient.getPhoneBook();
+            publishResult(phoneBook);
         } catch (Exception e) {
             publishError(e);
         }
     }
 
     @UiThread
-    void publishResult(FacebookPage fbPage) {
+    void publishResult(PhoneBook phoneBook) {
+        activity.updatePhonebook(phoneBook);
     }
 
     @UiThread
