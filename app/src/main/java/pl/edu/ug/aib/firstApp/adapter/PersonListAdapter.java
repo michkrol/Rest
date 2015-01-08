@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import pl.edu.ug.aib.firstApp.data.Person;
+import pl.edu.ug.aib.firstApp.data.PhoneBook;
 import pl.edu.ug.aib.firstApp.itemView.PersonItemView;
 import pl.edu.ug.aib.firstApp.itemView.PersonItemView_;
 
@@ -54,6 +55,12 @@ public class PersonListAdapter extends BaseAdapter {
         personItemView.bind(getItem(position));
 
         return personItemView;
+    }
+
+    public void update(PhoneBook phoneBook) {
+        persons.clear();
+        persons.addAll(phoneBook.records);
+        notifyDataSetChanged();
     }
 
 }

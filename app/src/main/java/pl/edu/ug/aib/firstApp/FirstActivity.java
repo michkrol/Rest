@@ -16,6 +16,7 @@ import org.androidannotations.annotations.ViewById;
 
 import pl.edu.ug.aib.firstApp.adapter.PersonListAdapter;
 import pl.edu.ug.aib.firstApp.data.Person;
+import pl.edu.ug.aib.firstApp.data.PhoneBook;
 
 @EActivity(R.layout.activity_my)
 @OptionsMenu(R.menu.my)
@@ -54,6 +55,11 @@ public class FirstActivity extends ActionBarActivity {
 
     @OptionsItem
     void settingsSelected() {
+    }
+
+    public void updatePhonebook(PhoneBook phoneBook) {
+        ringProgressDialog.dismiss();
+        adapter.update(phoneBook);
     }
 
 }
