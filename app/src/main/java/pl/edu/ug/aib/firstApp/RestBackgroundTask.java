@@ -29,7 +29,6 @@ public class RestBackgroundTask {
 
     @UiThread
     void publishResult(FacebookPage fbPage) {
-        activity.goToSecondActivity(fbPage);
     }
 
     @UiThread
