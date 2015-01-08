@@ -7,6 +7,7 @@ import android.widget.Toast;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Bean;
+import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.ItemClick;
 import org.androidannotations.annotations.NonConfigurationInstance;
@@ -60,6 +61,12 @@ public class FirstActivity extends ActionBarActivity {
     public void updatePhonebook(PhoneBook phoneBook) {
         ringProgressDialog.dismiss();
         adapter.update(phoneBook);
+    }
+
+    @Click
+    void refreshClicked()    {
+        ringProgressDialog.show();
+        restBackgroundTask.getPhoneBook();
     }
 
 }
