@@ -8,5 +8,6 @@ public class Person {
     public String phoneNumber;
     public String name;
     public String company;
+    public int ownerId;
 
 }

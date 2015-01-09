@@ -8,6 +8,7 @@ import org.androidannotations.api.rest.RestClientHeaders;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 
 import pl.edu.ug.aib.firstApp.data.EmailAndPassword;
+import pl.edu.ug.aib.firstApp.data.Person;
 import pl.edu.ug.aib.firstApp.data.PhoneBook;
 import pl.edu.ug.aib.firstApp.data.User;
 
@@ -20,5 +21,8 @@ public interface PhoneBookRestClient extends RestClientHeaders {
 
     @Post("/user/session")
     User login(EmailAndPassword emailAndPassword);
+
+    @Post("/db/person")
+    int addUser(Person person, String sessionId);
 
 }

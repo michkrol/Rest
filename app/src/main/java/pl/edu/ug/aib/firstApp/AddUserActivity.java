@@ -4,27 +4,21 @@ import android.app.ProgressDialog;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.Toast;
 
 import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.Bean;
 import org.androidannotations.annotations.Click;
 import org.androidannotations.annotations.EActivity;
-import org.androidannotations.annotations.ItemClick;
 import org.androidannotations.annotations.NonConfigurationInstance;
-import org.androidannotations.annotations.OptionsItem;
-import org.androidannotations.annotations.OptionsMenu;
 import org.androidannotations.annotations.ViewById;
 
-import pl.edu.ug.aib.firstApp.adapter.PersonListAdapter;
 import pl.edu.ug.aib.firstApp.data.EmailAndPassword;
 import pl.edu.ug.aib.firstApp.data.Person;
-import pl.edu.ug.aib.firstApp.data.PhoneBook;
 import pl.edu.ug.aib.firstApp.data.User;
 
-@EActivity(R.layout.activity_login)
-public class LoginActivity extends ActionBarActivity {
+@EActivity(R.layout.activity_add_user)
+public class AddUserActivity extends ActionBarActivity {
 
     @ViewById
     EditText email;
@@ -34,7 +28,7 @@ public class LoginActivity extends ActionBarActivity {
 
     @Bean
     @NonConfigurationInstance
-    RestLoginBackgroundTask restLoginBackgroundTask;
+    RestAddUserBackgroundTask restAddUserBackgroundTask;
 
     ProgressDialog ringProgressDialog;
 
@@ -51,20 +45,22 @@ public class LoginActivity extends ActionBarActivity {
         e.printStackTrace();
     }
 
-    public void loginSuccess(User user) {
+    public void addingSuccess(int id) {
         ringProgressDialog.dismiss();
-        Log.d(this.getLocalClassName(), "Login succeeded");
-        // z '_' na końcu, bo wersja utworzona przez AndroidAnnotations
-        FirstActivity_.intent(this).user(user).start();
+        Log.d(this.getLocalClassName(), "Dodano osobę o id " + id);
+        Toast.makeText(this, ("Dodano osobę o id "+id), Toast.LENGTH_LONG).show();
     }
 
     @Click
-    void loginClicked()    {
+    void addUserClicked()    {
         ringProgressDialog.show();
+        Person person = new Person();
+
+
         EmailAndPassword emailAndPassword = new EmailAndPassword();
         emailAndPassword.email = email.getText().toString();
         emailAndPassword.password = password.getText().toString();
-        restLoginBackgroundTask.login(emailAndPassword);
+        restAddUserBackgroundTask.addUser(person, sessionId);
     }
 
 }
